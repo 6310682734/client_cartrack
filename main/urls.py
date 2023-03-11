@@ -5,5 +5,6 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('dashboard', views.dashboard, name='dashboard'),
     path('/file-upload', views.file_upload, name='upload'),
 ]
