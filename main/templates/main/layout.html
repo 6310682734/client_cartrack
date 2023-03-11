@@ -36,15 +36,15 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    {% comment %} <div class="collapse navbar-collapse  w-100 order-3 dual-collapse2" id="navbarSupportedContent">
+     <div class="collapse navbar-collapse  w-100 order-3 dual-collapse2" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        {% if request.user.is_authenticated and request.user.is_superuser %}
         <li class="nav-item">
-          <a href="/manager" class="text-dark mx-3 align-middle">
+          <a href="/dashboard" class="text-dark mx-3 align-middle">
             <i class="fa-solid fa-user-tie"></i>
-            Manager
+            Dashboard
           </a>
         </li>
+        {% comment %}
         {% elif request.user.is_authenticated and user_info.role_id.role_name == "Outside" %}
         <li class="nav-item">
           <a href="{% url 'occupant:get_reserve' %}" class="text-dark mx-3 align-middle">
