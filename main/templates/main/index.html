@@ -8,14 +8,10 @@
         </p>
       </div>
     </div>
-    <form action="" enctype="multipart/form-data" method="POST" class="dropzone dz" id="main-dropzone">
+    <form action="/dropzone-files" id="DidDropzone" class="dropzone dz" accept-charset="UTF-8" method="POST">
         {% csrf_token %}
-        <div class="fallback fb">
-            <input name="file" type="file" multiple />
-        </div>
-    </form>
+        <h3 class="dz-message">Click Here or Drop Files</h3>
+    </form>  
     <button id="button-upload" class="btn btn-success btn-upload">Submit</button>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </section>
 {% endblock %}

@@ -98,11 +98,6 @@ p {
     background-color: aliceblue !important;
 }
 
-.fb{
-    display: flex;
-    width: 500px;
-    justify-content: center;
-}
 
 .btn-upload{
     margin-top: 30px;
