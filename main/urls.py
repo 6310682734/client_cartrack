@@ -1,9 +1,10 @@
 from django.urls import path
 from . import views
 
+
 app_name = 'main'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('/file-upload', views.file_upload, name='upload'),
+    path('dropzone-files', views.dropzone_files, name="dropzone-files"),
 ]
