@@ -6,6 +6,10 @@ from .models import UserFiles
 def index(req):
     return render(req, "main/index.html")
 
+def dashboard(req):
+    return render(req, "main/dashboard.html")
+
+
 def dropzone_files(request):
 	print(request.FILES.get('file'))
 	if request.method == "POST":
@@ -18,3 +22,4 @@ def dropzone_files(request):
 		json.dumps({"result": result, "message": message}),
 		content_type="application/json"
 		)
+
