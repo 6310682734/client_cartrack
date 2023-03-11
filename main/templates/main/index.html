@@ -8,7 +8,7 @@
         </p>
       </div>
     </div>
-    <form action="{% url 'file-upload' %}" enctype="multipart/form-data" method="POST" class="dropzone dz" id="main-dropzone">
+    <form action="" enctype="multipart/form-data" method="POST" class="dropzone dz" id="main-dropzone">
         {% csrf_token %}
         <div class="fallback fb">
             <input name="file" type="file" multiple />
