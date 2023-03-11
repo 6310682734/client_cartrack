@@ -1,22 +1,13 @@
-ondragenter = function(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-};
+Dropzone.autoDiscover = false;
 
-ondragover = function(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-};
+var myDropzone = new Dropzone(element, {                      
+  autoProcessQueue: false,
+  paramName: 'file',
+  clickable: true,
+  maxFiles: 5,
+  maxFilesize: 10,
+});
 
-ondrop = function(evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    const files = evt.originalEvent.dataTransfer;
-    var uploader = new FileUpload(files);
-    uploader.upload();
-};
-
-$('#dropBox')
-    .on('dragover', ondragover)
-    .on('dragenter', ondragenter)
-    .on('drop', ondrop);
+$('#button-upload').click(function(){           
+  myDropzone.processQueue();
+});
