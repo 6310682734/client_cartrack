@@ -98,6 +98,20 @@ p {
     background-color: aliceblue !important;
 }
 
+.dz-modal {
+    margin-top: 20px;
+    border: dashed !important;
+    border-color: #ccc !important;
+    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;    
+    max-width: 600px;
+}
+
+.dz-modal:hover{
+    background-color: aliceblue !important;
+}
+
 
 .btn-upload{
     margin-top: 30px;
@@ -107,6 +121,46 @@ p {
     justify-content: center;
 }
 
+.btn-create{
+    margin-left: 20px;
+}
+
+.form-newtask{
+    padding: 20px;
+    border: double;
+    border-color: #ccc !important;
+    border-radius: 10px;
+    max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;    
+}
+
+.form-index{
+    padding: 20px;
+    border: double;
+    border-color: #ccc !important;
+    border-radius: 10px;
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;    
+}
+
+.select-index{
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;    
+}
+
+.select-modal{
+    max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;    
+}
+
+h1, button{
+    display: inline-block;
+    vertical-align: middle;
+  }
 .dz-remove
 {
     display:inline-block !important;

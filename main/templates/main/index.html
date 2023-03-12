@@ -9,10 +9,47 @@
       </div>
     </div>
     {% load static %}
-    <form action="/dropzone-files" id="DidDropzone" class="dropzone dz" accept-charset="UTF-8" method="POST">
+    <form action="/dropzone-files" id="DidDropzone" class="dropzone dz mb-2" accept-charset="UTF-8" method="POST">
         {% csrf_token %}
         <h3 class="dz-message">Click Here or Drop Files</h3>
-    </form>  
+    </form>
+    <div class="select-index mb-2">
+      <label class="mr-sm-2 " for="taskindex-select">Preference</label>
+      <select class="custom-select mr-sm-4" id="taskindex-select" onchange="showFormIndex(this)">
+      <option selected>Preset</option>
+      <option value="form_1">New Information</option>
+      </select>
+    </div>
+    <div class="modal-body p-4 form-modal">
+      <form class="form-index" name="form_1" id="form_1" style="display:none">
+          <label class="mr-sm-2" for="taskindex-select">Information</label>
+          <div class="input-group mb-2 ml-0 col-10">
+              <div class="input-group-prepend">
+                  <div class="input-group-text">Name</div>
+              </div>
+              <input type="text" id="name4" class="form-control" />
+          </div>
+          <div class="input-group mb-2 mt-1 col-6">
+              <div class="input-group date mb-2 ml-0" id="datetimepicker10" data-target-input="nearest">
+                  <div class="input-group-prepend" data-target="#datetimepicker10" data-toggle="datetimepicker">
+                      <div class="input-group-text">Date</div>
+                  </div>
+                  <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker10"/>
+              </div>
+          </div>
+          <script type="text/javascript">
+              $(function () {
+                  $('#datetimepicker10').datetimepicker({
+                      viewMode: 'years'
+                  });
+              });
+          </script>
+          <div class="form-outline mt-1">
+              <label class="form-label" for="textarea4">Description</label>
+              <textarea id="textarea4" rows="4" class="form-control"></textarea>
+          </div>
+      </form>
+    </div>
     <button id="button-upload" class="btn btn-success btn-upload">Submit</button>
 </section>
 {% endblock %}
