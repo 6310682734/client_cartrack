@@ -8,6 +8,7 @@
         </p>
       </div>
     </div>
+    {% load static %}
     <form action="/dropzone-files" id="DidDropzone" class="dropzone dz" accept-charset="UTF-8" method="POST">
         {% csrf_token %}
         <h3 class="dz-message">Click Here or Drop Files</h3>
