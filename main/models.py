@@ -4,7 +4,7 @@ from django.db import models
 class UserFiles(models.Model):
 	
 	timestamp = models.DateTimeField(auto_now_add=True)
-	image = models.ImageField(verbose_name="User image", upload_to="user_file")
+	image = models.ImageField(verbose_name="User file", upload_to="")
 
 	def __str__(self):
 		return f''
