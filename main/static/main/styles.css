@@ -161,6 +161,12 @@ h1, button{
     display: inline-block;
     vertical-align: middle;
   }
+
+video, .table-edit{
+    display: inline-block;
+    vertical-align: top;
+}
+
 .dz-remove
 {
     display:inline-block !important;
@@ -192,4 +198,9 @@ h1, button{
     background-color: white !important;
     text-decoration:none !important;
     opacity:1;
+}
+
+video{
+    width: 60%    !important;
+    height: 40%   !important;
 }
