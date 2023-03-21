@@ -16,11 +16,13 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" />
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
   {% load static %}
-  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="{% static 'main/styles.css' %}" />
+  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css" >
+  <link rel="stylesheet" href="{% static 'main/styles.css' %}" >
   <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
   <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
@@ -35,7 +37,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
     <a class="navbar-brand" href="/">
       <i class="fa-solid fa-building-user"></i>
-      Car Tracker
+      Car Tracker, {{request.user}}
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -47,9 +49,8 @@
             <i class="fa-solid fa-user-tie"></i>
             Dashboard
           </a>
-        </li>
-        {% comment %}
-        {% elif request.user.is_authenticated and user_info.role_id.role_name == "Outside" %}
+        </li>       
+        {% if request.user.is_authenticated and user_info.role_id.role_name == "Outside" %}
         <li class="nav-item">
           <a href="{% url 'occupant:get_reserve' %}" class="text-dark mx-3 align-middle">
             <i class="fa-solid fa-circle-info"></i>
@@ -102,35 +103,37 @@
             Technician
           </a>
         </li>
-        {% endif %}
-        {% if request.user.is_authenticated %}
+        {% endif %} {% comment %}
+        
         <li class="nav-item">
           <a href="{% url 'users:change_password' %}" class="text-dark mx-3 align-middle">
             <i class="fa-solid fa-lock"></i>
             Change Password
           </a>
         </li>
+        {% endcomment %}
+        {% if request.user.is_authenticated %}
         <li class="nav-item">
-          <a class="text-danger mx-3 align-middle" href="{% url 'users:logout'%}" role="button">
+          <a class="text-danger mx-3 align-middle" href="{% url 'main:logout'%}" role="button">
             <i class="fa-solid fa-right-from-bracket"></i>
             Sign Out
           </a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a href="{% url 'users:register' %}" class="text-dark mx-3 align-middle">
+          <a href="{% url 'main:register' %}" class="text-dark mx-3 align-middle">
             Sign Up
           </a>
         </li>
         <li class=" nav-item">
-          <a class="btn text-light btn-sm ml-3" href="{% url 'users:login' %}" role="button" style="background-color: #192e80;">
+          <a class="btn text-light btn-sm ml-3" href="{% url 'main:login' %}" role="button" style="background-color: #192e80;">
             Sign In
             <!-- <i class="fa-solid fa-arrow-right-to-bracket"></i> -->
           </a>
         </li>
         {% endif %}
       </ul>
-    </div> {% endcomment %}
+    </div> 
   </nav>
   <div class="container-fluid">{% block body %} {% endblock %}</div>
   <footer>
