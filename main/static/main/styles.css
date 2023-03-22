@@ -58,6 +58,8 @@
   font-weight: bolder;
   margin-top: 30px;
   padding: 15px;
+  position: absolute;
+  width: 100%;
 }
 
 .footer-list {
@@ -207,7 +209,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #7abecc !important;
+  background: white !important;
 }
 
 .user_card {
