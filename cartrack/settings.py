@@ -118,6 +118,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+FILE_UPLOAD_HANDLERS = (
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler"
+)
+FILE_UPLOAD_MAX_MEMORY_SIZE = int(15 * 1024 * 1024)
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),

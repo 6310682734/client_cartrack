@@ -5,9 +5,8 @@ var Drop = Dropzone.options.DidDropzone = {
     paramName: "file", // The name that will be used to transfer the file
     maxFilesize: 20, // Maximum size of file that you will allow (MB)
     clickable: true, // This allows the dropzone to select images onclick
-    acceptedFiles: '.jpg,.jpeg,.JPEG,.JPG,.png,.PNG,.mp4,.MP4', //accepted file types
+    acceptedFiles: '.mp4,.MP4', //accepted file types
     maxFiles: 10, //Maximum number of files/images in dropzone
-    parallelUploads: 10,
     dictRemoveFile: 'X',
     previewTemplate: '<div class="dz-preview dz-image-preview">'+
                         '<div class="dz-image">'+
