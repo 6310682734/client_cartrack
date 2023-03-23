@@ -8,6 +8,7 @@ from django.conf import settings
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import requests
 
 # Create your views here.
 
@@ -15,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 def index(req):
     return render(req, "main/index.html")
 
-@login_required(login_url='main:login')
+#@login_required(login_url='main:login')
 def dashboard(req):
     return render(req, "main/dashboard.html")
 
@@ -48,20 +49,27 @@ def display_video(request, vid=None):
 
     return render(request, "edit.html", {"url": video_url})
 
-@login_required(login_url='main:login')
+#@login_required(login_url='main:login')
 def dropzone_files(request):
-    print(request.FILES.get('file'))
+    url = 'http://localhost:3003/v1/upload'
     if request.method == "POST":
-        image = request.FILES.get('file')
-        img = UserFiles.objects.create(image=image)
+        image = request.FILES['file']
+        print(image.content_type, image.name, image.size)
+        header = {'Content-Type: multipart/form-data'}
+        # img = UserFiles.objects.create(image=image)
+        result = requests.post(url, files={"file": image})
+        print(result.content)
+        return HttpResponse({}, content_type="multipart/form-data")
 
-        return HttpResponse({}, content_type="application/json")
+def call_scheduler(request):
+    url = 'http://localhost:8001/'
+    if request.method == 'POST':
+        r = requests.post('http://localhost:8001/', params=request.POST)
+        data = {}
 
-    return HttpResponse(
-        json.dumps({"result": result, "message": message}),
-        content_type="application/json"
-    )
-
+    if r.status_code == 200:
+        return HttpResponse('Yay, it worked')
+    return HttpResponse('Could not save data')
 
 #   Registrations
 def RegisterPage(request):
