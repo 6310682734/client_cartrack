@@ -16,7 +16,7 @@ import requests
 def index(req):
     return render(req, "main/index.html")
 
-#@login_required(login_url='main:login')
+@login_required(login_url='main:login')
 def dashboard(req):
     return render(req, "main/dashboard.html")
 
@@ -49,7 +49,7 @@ def display_video(request, vid=None):
 
     return render(request, "edit.html", {"url": video_url})
 
-#@login_required(login_url='main:login')
+@login_required(login_url='main:login')
 def dropzone_files(request):
     url = 'http://localhost:3003/v1/upload'
     if request.method == "POST":
