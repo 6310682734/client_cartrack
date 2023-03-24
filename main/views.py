@@ -56,7 +56,7 @@ def dropzone_files(request):
         user = User.objects.get(id=request.user.id)
     except Exception as e:
         print(e)
-    url = 'http://localhost:3003/v1/upload'
+    url = 'http://178.128.115.54:3003/v1/upload'
     if request.method == "POST":
         image = request.POST['file']
         print(image)
