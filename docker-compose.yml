@@ -8,6 +8,8 @@ services:
     ports:
       - "3001:3001"
     environment:
-      FLASK_APP: app.py
-      FLASK_ENV: development
-    command: sh -c 'pip install -r requirements.txt && python manage.py runserver'
+      PYTHONUNBUFFERED: 1
+      DJANGO_SUPERUSER_USERNAME: "admin"
+      DJANGO_SUPERUSER_PASSWORD: "admin"
+      DJANGO_SUPERUSER_EMAIL: "admin@admin.com"
+    command: sh -c "pip install -r requirements.txt && python manage.py migrate && python manage.py createsuperuser --noinput && python manage.py runserver"
