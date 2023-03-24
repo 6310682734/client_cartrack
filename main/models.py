@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class UserFiles(models.Model):
@@ -11,13 +12,13 @@ class UserFiles(models.Model):
 	
 class JobTask(models.Model):
 
-	locationName = models.CharField(max_length=100)
-	latitude = models.DecimalField(max_digits=9, decimal_places=6)
-	longtitude = models.DecimalField(max_digits=9, decimal_places=6)
-	linkVideo = models.URLField()
-	uid = models.PositiveIntegerField()
+	locationName = models.CharField(max_length=100, null=True ,blank=True)
+	latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True ,blank=True)
+	longtitude = models.DecimalField(max_digits=9, decimal_places=6, null=True ,blank=True)
+	linkVideo = models.URLField(null=True ,blank=True)
+	uid = models.ForeignKey(User, on_delete=models.CASCADE, null=True ,blank=True)
 	jobId = models.PositiveIntegerField()
-	status = models.TextField()
+	status = models.TextField(null=True ,blank=True)
 	createdAt = models.DateTimeField(auto_now_add=True)
 	updatedAt = models.DateTimeField(auto_now_add=True)
 
