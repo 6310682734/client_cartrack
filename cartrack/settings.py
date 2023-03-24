@@ -126,8 +126,8 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = int(15 * 1024 * 1024)
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'media')
+    # os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'media')
 ]
 
 STATIC_URL = '/static/'
