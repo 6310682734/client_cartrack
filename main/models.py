@@ -13,8 +13,8 @@ class UserFiles(models.Model):
 class JobTask(models.Model):
 
 	locationName = models.CharField(max_length=100, null=True ,blank=True)
-	latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True ,blank=True)
-	longtitude = models.DecimalField(max_digits=9, decimal_places=6, null=True ,blank=True)
+	latitude = models.DecimalField(max_digits=15, decimal_places=6, null=True ,blank=True)
+	longtitude = models.DecimalField(max_digits=15, decimal_places=6, null=True ,blank=True)
 	linkVideo = models.URLField(null=True ,blank=True)
 	uid = models.ForeignKey(User, on_delete=models.CASCADE, null=True ,blank=True)
 	jobId = models.PositiveIntegerField()

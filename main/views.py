@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import User, JobTask
+from decimal import *
 import requests
 
 
@@ -80,8 +81,8 @@ def dropzone_files(request):
                 linkVideo=json_data['data']['filePath'], 
                 uid=user,
                 locationName="default",
-                latitude = 0,
-                longtitude = 0,
+                latitude = Decimal(0),
+                longtitude = Decimal(0),
                 status="Waiting"
             )
             update_data_task(request, json_data)
@@ -111,8 +112,9 @@ def recive_hook(request):
 def update_data_task(request, data_job):
     if request.method == 'POST':
         task_data = JobTask.objects.get(jobId=data_job['id'])
-        task_data.latitude = request.POST.get('latitude')
-        task_data.longtitude = request.POST.get('longtitude')
+        task_data.latitude = float(request.POST['latitude'])
+        task_data.longtitude = float(request.POST['longtitude'])
+        print(type(task_data.latitude),type(task_data.longtitude))
         task_data.locationName = request.POST.get('fname')
         task_data.save()
         return redirect('main:dashboard')
