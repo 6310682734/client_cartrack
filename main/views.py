@@ -71,7 +71,8 @@ def dropzone_files(request):
         # img = UserFiles.objects.create(image=image)
         result = requests.post(url, files={"file": image})
         json_data = json.loads(result.content)
-        print(json_data['data']['filePath'])
+        print(json_data)
+        # print(json_data['data']['filePath'])
         
         if(json_data):
             JobTask.objects.create(
