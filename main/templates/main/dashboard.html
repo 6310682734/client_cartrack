@@ -1,6 +1,6 @@
 {% extends 'main/layout.html' %} {% block body %}
 <section>
-    <h1 class="text-start">Dashboard</h1>
+    <h1 class="text-start">My Task</h1>
     <button id="create-button" class="btn btn-success btn-create" data-toggle="modal" data-target="#exampleModalCenter" >New Task</button>
     <div class="input-group rounded">
     <input
@@ -20,60 +20,32 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th scope="col">Date</th>
+            <th scope="col">JobID</th>
             <th scope="col">Name</th>
-            <th scope="col">Location</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longtitude</th>
             <th scope="col">Status</th>
-            <th scope="col">Owner</th>
             <th scope="col">Date Modify</th>
             <th scope="col">Date Upload</th>
             <th scope="col">Edit/Delete</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td scope="row">1/1/1</td>
-            <td>
-                <a href="#">แยกรินคำ</a>
-            </td>
-            <td>
-                <a href="https://maps.google.com?daddr=18.801372312704572,98.96787433929524&z=13" target="_blank">XXX, XXX</a>
-            </td>
-            <td>Processing</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <a class="btn btn-warning" href="/edit" role="button">Edit</a>
-                <a class="btn btn-danger" href="#" role="button">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td scope="row"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <a class="btn btn-warning" href="#" role="button">Edit</a>
-                <a class="btn btn-danger" href="#" role="button">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td scope="row"></td>
-            <td></td>
-            <td></td>
-            <td>Done</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <a class="btn btn-warning" href="#" role="button">Edit</a>
-                <a class="btn btn-danger" href="#" role="button">Delete</a>
-            </td>
-        </tr>
+            {% for jobtask in jobtasks %}
+                    <tr>
+                        <td scope="row">{{ jobtask.jobId }}</td>
+                        <td>{{ jobtask.uid.username }}</td>
+                        <td>{{ jobtask.latitude }}</td>
+                        <td>{{ jobtask.longtitude }}</td>
+                        <td>{{ jobtask.status }}</td>
+                        <td>{{ jobtask.updatedAt }}</td>
+                        <td>{{ jobtaskx.createdAt }}</td>
+                        <td>
+                            <a class="btn btn-warning" href="/edit" role="button">Edit</a>
+                            <a class="btn btn-danger" href="#" role="button">Delete</a>
+                        </td>
+                    </tr>
+            {% endfor %}
         </tbody>
     </table>
     <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

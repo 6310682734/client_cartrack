@@ -1,59 +1,116 @@
 {% extends 'main/layout.html' %} {% block body %}
-<section class="about-header-section">
-    <div class="text-center mt-4">
-      <h1 id='about_us' class="header">Upload File</h1>
-      <div class="description">
-        <p>
-          Upload file that you would like us to help you check !
-        </p>
-      </div>
+<section>
+    <h1 class="text-start">All Task</h1>
+    <button id="create-button" class="btn btn-success btn-create" data-toggle="modal" data-target="#exampleModalCenter" >New Task</button>
+    <div class="input-group rounded">
+    <input
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+    />
+    <span class="input-group-text border-0" id="search-addon">
+        <i class="bi bi-search"></i>
+    </span>
     </div>
-    {% load static %}
-    <form action="/dropzone-files" id="DidDropzone" class="dropzone dz mb-2" accept-charset="UTF-8" method="POST">
-        {% csrf_token %}
-        <h3 class="dz-message">Click Here or Drop Files</h3>
-    </form>
-    <div class="select-index mb-2">
-      <label class="mr-sm-2 " for="taskindex-select">Preference</label>
-      <select class="custom-select mr-sm-4" id="taskindex-select" onchange="showFormIndex(this)">
-      <option selected>Preset</option>
-      <option value="form_1">New Information</option>
-      </select>
-    </div>
-    <div class="modal-body p-4 form-modal">
-      <form class="form-index" name="form_1" id="form_1" style="display:none">
-          <label class="mr-sm-2" for="taskindex-select">Information</label>
-          <div class="input-group mb-2 ml-0 col-10">
-              <div class="input-group-prepend">
-                  <div class="input-group-text">Name</div>
-              </div>
-              <input type="text" id="name4" class="form-control" />
-          </div>
-          <div class="input-group mb-2 mt-1 col-6">
-              <div class="input-group date mb-2 ml-0" id="datetimepicker10" data-target-input="nearest">
-                  <div class="input-group-prepend" data-target="#datetimepicker10" data-toggle="datetimepicker">
-                      <div class="input-group-text">Date</div>
-                  </div>
-                  <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker10"/>
-              </div>
-          </div>
-          <script type="text/javascript">
-              $(function () {
-                  $('#datetimepicker10').datetimepicker({
-                      viewMode: 'years'
-                  });
-              });
-          </script>
-          <div class="form-outline mt-1">
-            <label class="form-label" for="textarea3">Location</label>
-            <textarea id="textarea3" rows="3" class="form-control"></textarea>
+</section>
+<br>
+<section>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">JobID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longtitude</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date Modify</th>
+            <th scope="col">Date Upload</th>
+            <th scope="col">Edit/Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for jobtask in jobtasks %}
+                    <tr>
+                        <td scope="row">{{ jobtask.jobId }}</td>
+                        <td>{{ jobtask.uid.username }}</td>
+                        <td>{{ jobtask.latitude }}</td>
+                        <td>{{ jobtask.longtitude }}</td>
+                        <td>{{ jobtask.status }}</td>
+                        <td>{{ jobtask.updatedAt }}</td>
+                        <td>{{ jobtaskx.createdAt }}</td>
+                        <td>
+                            <a class="btn btn-warning" href="/edit" role="button">Edit</a>
+                            <a class="btn btn-danger" href="#" role="button">Delete</a>
+                        </td>
+                    </tr>
+            {% endfor %}
+    </tbody>
+    </table>
+    <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Create New Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-          <div class="form-outline mt-1">
-              <label class="form-label" for="textarea3">Description</label>
-              <textarea id="textarea4" rows="3" class="form-control"></textarea>
+            <div class="modal-body">
+                <form action="/dropzone-files" id="DidDropzone" class="dropzone dz-modal mb-2" accept-charset="UTF-8" method="POST">
+                    {% csrf_token %}
+                    <h3 class="dz-message">Click Here or Drop Files</h3>
+                </form>
+                <div class="select-modal col-6">
+                    <label class="mr-sm-2" for="newtask-select">Preference</label>
+                    <select class="custom-select mr-sm-4" id="newtask-select" onchange="showForm(this)">
+                    <option selected>Preset</option>
+                    <option value="form_1">New Information</option>
+                    </select>
+                </div>
+                <div class="modal-body p-4 form-modal">
+                    <form class="form-newtask" name="form_1" id="form_1" style="display:none">
+                        <label class="mr-sm-2" for="newtask-select">Information</label>
+                        <div class="input-group mb-2 ml-0 col-10">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Name</div>
+                            </div>
+                            <input type="text" id="name4" class="form-control" />
+                        </div>
+
+                        <div class="input-group mb-2 mt-1 col-6">
+                            <div class="input-group date mb-2 ml-0" id="datetimepicker10" data-target-input="nearest">
+                                <div class="input-group-prepend" data-target="#datetimepicker10" data-toggle="datetimepicker">
+                                    <div class="input-group-text">Date</div>
+                                </div>
+                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker10"/>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker10').datetimepicker({
+                                    viewMode: 'years'
+                                });
+                            });
+                        </script>
+                        <div class="form-outline mt-1">
+                            <label class="form-label" for="textarea3">Location</label>
+                            <textarea id="textarea3" rows="3" class="form-control"></textarea>
+                            </div>
+                        <div class="form-outline mb-2 mt-1">
+                            <label class="form-label" for="textarea4">Description</label>
+                            <textarea id="textarea4" rows="4" class="form-control"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" id="button-upload" class="btn btn-success">Create</button>
+            </div>
           </div>
-      </form>
-    </div>
-    <button id="button-upload" class="btn btn-success btn-upload">Submit</button>
+        </div>
+      </div>
 </section>
 {% endblock %}

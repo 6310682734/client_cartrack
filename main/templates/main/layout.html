@@ -34,6 +34,7 @@
 </head>
 
 <body>
+  {% if request.path != "/login/" %}
   <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
     <a class="navbar-brand" href="/">
       <i class="fa-solid fa-building-user"></i>
@@ -47,7 +48,7 @@
         <li class="nav-item">
           <a href="/dashboard" class="text-dark mx-3 align-middle">
             <i class="fa-solid fa-user-tie"></i>
-            Dashboard
+            My Task
           </a>
         </li>       
         {% if request.user.is_authenticated and user_info.role_id.role_name == "Outside" %}
@@ -135,7 +136,9 @@
       </ul>
     </div> 
   </nav>
+  {% endif %}
   <div class="container-fluid">{% block body %} {% endblock %}</div>
+  {% if request.path != "/login/" %}
   <footer>
     <div class="footer">
       <div class="container">
@@ -158,6 +161,7 @@
         </div>
       </div>
   </footer>
+  {% endif %}
   {% block scripts %}
   {% endblock %}
 </body>

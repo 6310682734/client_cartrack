@@ -8,17 +8,20 @@ from django.conf import settings
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import User, JobTask
 
 # Create your views here.
 
 @login_required(login_url='main:login')
 def index(req):
-    return render(req, "main/index.html")
+    jobtask = JobTask.objects.all()
+    return render(req, "main/index.html", {'jobtasks': jobtask})
 
 @login_required(login_url='main:login')
 def dashboard(req):
-    return render(req, "main/dashboard.html")
-
+    user = User.objects.get(id=req.user.id)
+    jobtask = JobTask.objects.filter(uid=user.id)
+    return render(req, 'main/dashboard.html', {'jobtasks': jobtask, 'users': user})
 @login_required(login_url='main:login')
 def edit(req):
     return render(req, "main/edit.html")
