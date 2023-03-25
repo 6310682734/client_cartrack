@@ -3,25 +3,30 @@ from django.http import HttpResponse
 import json
 import os
 import fnmatch
-from .models import UserFiles
+from .models import UserFiles, JobTask
 from django.conf import settings
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import User, JobTask
+import requests
+
 
 # Create your views here.
 
-@login_required(login_url='main:login')
+#@login_required(login_url='main:login')
 def index(req):
     jobtask = JobTask.objects.all()
     return render(req, "main/index.html", {'jobtasks': jobtask})
 
-@login_required(login_url='main:login')
+#@login_required(login_url='main:login')
 def dashboard(req):
+
     user = User.objects.get(id=req.user.id)
     jobtask = JobTask.objects.filter(uid=user.id)
     return render(req, 'main/dashboard.html', {'jobtasks': jobtask, 'users': user})
+
 @login_required(login_url='main:login')
 def edit(req):
     return render(req, "main/edit.html")
@@ -53,17 +58,64 @@ def display_video(request, vid=None):
 
 @login_required(login_url='main:login')
 def dropzone_files(request):
-    print(request.FILES.get('file'))
+    try:
+        user = User.objects.get(id=request.user.id)
+    except Exception as e:
+        print(e)
+    url = 'http://178.128.115.54:3003/v1/upload'
     if request.method == "POST":
-        image = request.FILES.get('file')
-        img = UserFiles.objects.create(image=image)
+        image = request.POST['file']
+        print(image)
+        #print(image.content_type, image.name, image.size)
+        header = {'Content-Type: multipart/form-data'}
+        # img = UserFiles.objects.create(image=image)
+        result = requests.post(url, files={"file": image})
+        json_data = json.loads(result.content)
+        print(json_data['data']['filePath'])
+        
+        if(json_data):
+            JobTask.objects.create(
+                jobId=json_data['id'], 
+                linkVideo=json_data['data']['filePath'], 
+                uid=user,
+                locationName="default",
+                latitude = 0,
+                longtitude = 0,
+                status="Waiting"
+            )
+            update_data_task(request, json_data)
+            return redirect('main:dashboard')
+            #update_data_task(request, json_data)
+        # pickup_dict = {}
+        # pickup_records=[]
 
-        return HttpResponse({}, content_type="application/json")
+        # for data in result:
+        #         print(data)
+        # pickup_dict["pickup"]=pickup_records
+        return HttpResponse({}, content_type="multipart/form-data")
 
-    return HttpResponse(
-        json.dumps({"result": result, "message": message}),
-        content_type="application/json"
-    )
+def recive_hook(request):
+    if request.method == 'POST':
+        try:
+            json_data = json.loads(request.body)
+            job = JobTask.objects.get(jobId=json_data['job_id'])
+            job.linkVideo=json_data['result']['file_name']
+            job.status="SUCCESS"
+            job.save()
+        except Exception as e:
+            return HttpResponse(e)
+        return HttpResponse('Yay, it worked', status=200)
+    return HttpResponse('Could not save data')
+
+def update_data_task(request, data_job):
+    if request.method == 'POST':
+        task_data = JobTask.objects.get(jobId=data_job['id'])
+        task_data.latitude = request.POST.get('latitude')
+        task_data.longtitude = request.POST.get('longtitude')
+        task_data.locationName = request.POST.get('fname')
+        task_data.save()
+        return redirect('main:dashboard')
+    return HttpResponse('Could not update data')
 
 
 #   Registrations

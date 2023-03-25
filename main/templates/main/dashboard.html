@@ -2,6 +2,7 @@
 <section>
     <h1 class="text-start">My Task</h1>
     <button id="create-button" class="btn btn-success btn-create" data-toggle="modal" data-target="#exampleModalCenter" >New Task</button>
+
     <div class="input-group rounded">
     <input
         type="search"
@@ -53,61 +54,54 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">Create New Task</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <form action="/dropzone-files" id="DidDropzone" class="dropzone dz-modal mb-2" accept-charset="UTF-8" method="POST">
+                <form  action="/dropzone-files" class="form-data" name="form-data" id="form-data" method="POST">
                     {% csrf_token %}
-                    <h3 class="dz-message">Click Here or Drop Files</h3>
-                </form>
-                <div class="select-modal col-6">
-                    <label class="mr-sm-2" for="newtask-select">Preference</label>
-                    <select class="custom-select mr-sm-4" id="newtask-select" onchange="showForm(this)">
-                    <option selected>Preset</option>
-                    <option value="form_1">New Information</option>
-                    </select>
-                </div>
-                <div class="modal-body p-4 form-modal">
-                    <form class="form-newtask" name="form_1" id="form_1" style="display:none">
+                    {% comment %} 
+                    <form action="/dropzone-files" id="DidDropzone" class="dropzone dz-modal mb-2" accept-charset="UTF-8" method="POST">
+                        {% csrf_token %}
+                        <h3 class="dz-message">Click Here or Drop Files</h3>
+                    </form> 
+                    {% endcomment %}
+                    <div class="mb-3 col-6 select-modal">
+                        <label for="formFile" class="form-label">Default file input example</label>
+                        <input name="file" class="form-control" type="file" id="formFile">
+                    </div>
+                    <div class="select-modal col-6">
+                        <label class="mr-sm-2" for="newtask-select">Preference</label>
+                        <select class="custom-select mr-sm-4" id="newtask-select" onchange="showForm(this)">
+                            <option selected>Preset</option>
+                            <option value="form-newtask">New Information</option>
+                        </select>
+                    </div>
+                    <div class="modal-body p-4 mt-4 form-modal form-newtask" id="form-newtask" style="display:none">
                         <label class="mr-sm-2" for="newtask-select">Information</label>
-                        <div class="input-group mb-2 ml-0 col-10">
+                        <div class="input-group mb-2 ml-0 col-12">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Name</div>
                             </div>
-                            <input type="text" id="name4" class="form-control" />
+                            <input name="fname" type="text" id="fname" class="form-control" />
                         </div>
-
-                        <div class="input-group mb-2 mt-1 col-6">
-                            <div class="input-group date mb-2 ml-0" id="datetimepicker10" data-target-input="nearest">
-                                <div class="input-group-prepend" data-target="#datetimepicker10" data-toggle="datetimepicker">
-                                    <div class="input-group-text">Date</div>
-                                </div>
-                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker10"/>
+                        <div class="input-group mb-2 ml-0 col-12">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Latitude</div>
                             </div>
-                        </div>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker10').datetimepicker({
-                                    viewMode: 'years'
-                                });
-                            });
-                        </script>
-                        <div class="form-outline mt-1">
-                            <label class="form-label" for="textarea3">Location</label>
-                            <textarea id="textarea3" rows="3" class="form-control"></textarea>
+                            <input name="latitude" type="text" id="latitude" class="form-control" />
+                            <div class="input-group-prepend ml-2">
+                                <div class="input-group-text">Longtitude</div>
                             </div>
-                        <div class="form-outline mb-2 mt-1">
-                            <label class="form-label" for="textarea4">Description</label>
-                            <textarea id="textarea4" rows="4" class="form-control"></textarea>
+                            <input name="longtitude" type="text" id="longtitude" class="form-control" />
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" id="button-upload" class="btn btn-success">Create</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" form="form-data" class="btn btn-success">Create</button>
             </div>
           </div>
         </div>

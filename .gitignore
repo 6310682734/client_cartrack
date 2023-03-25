@@ -6,3 +6,5 @@ db.sqlite3
 mp4
 media_cdn/
 media/
+main/migrations/
+.env
