@@ -24,8 +24,7 @@
         <tr>
             <th scope="col">JobID</th>
             <th scope="col">Name</th>
-            <th scope="col">Latitude</th>
-            <th scope="col">Longtitude</th>
+            <th scope="col">Location</th>
             <th scope="col">Status</th>
             <th scope="col">Date Modify</th>
             <th scope="col">Date Upload</th>
@@ -36,14 +35,15 @@
             {% for jobtask in jobtasks %}
                     <tr>
                         <td scope="row">{{ jobtask.jobId }}</td>
-                        <td>{{ jobtask.uid.username }}</td>
-                        <td>{{ jobtask.latitude }}</td>
-                        <td>{{ jobtask.longtitude }}</td>
+                        <td>{{ jobtask.locationName }}</td>
+                        <td>
+                            <a href="http://map.google.com/?saddr=&daddr={{jobtask.latitude}},{{jobtask.longtitude}}&travelmode=driving&dir_action=navigate" target="_blank">{{jobtask.latitude}},{{jobtask.longtitude}}</a>
+                        </td>
                         <td>{{ jobtask.status }}</td>
                         <td>{{ jobtask.updatedAt }}</td>
-                        <td>{{ jobtaskx.createdAt }}</td>
+                        <td>{{ jobtask.createdAt }}</td>
                         <td>
-                            <a class="btn btn-warning" href="/edit" role="button">Edit</a>
+                            <a class="btn btn-warning" href="{% url 'main:edit' jobtask.jobId %}" role="button">Edit</a>
                             <a class="btn btn-danger" href="#" role="button">Delete</a>
                         </td>
                     </tr>
