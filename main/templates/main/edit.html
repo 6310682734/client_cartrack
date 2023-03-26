@@ -1,6 +1,6 @@
 {% extends 'main/layout.html' %} {% block body %}
 <section>
-    <h1 class="text-start">Edit Loop</h1>
+    <h1 class="text-start">Location Name : {{ jobtask.locationName}}</h1>
     <button id="create-button" class="btn btn-success btn-create" data-toggle="modal" data-target="#exampleModalCenter" >New Loop</button>
 </section>
 <br>
@@ -56,6 +56,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+            {% comment %}
             <div class="modal-body">
                 <form action="{% url 'dropzone-files' %}" id="DidDropzone" class="dropzone dz-modal mb-2" accept-charset="UTF-8" method="POST">
                     {% csrf_token %}
@@ -100,6 +101,7 @@
                     </form>
                 </div>
             </div>
+            {% endcomment %}
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" id="button-upload" class="btn btn-success">Create</button>

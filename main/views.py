@@ -16,12 +16,12 @@ import requests
 
 # Create your views here.
 
-#@login_required(login_url='main:login')
+@login_required(login_url='main:login')
 def index(req):
     jobtask = JobTask.objects.all()
     return render(req, "main/index.html", {'jobtasks': jobtask})
 
-#@login_required(login_url='main:login')
+@login_required(login_url='main:login')
 def dashboard(req):
 
     user = User.objects.get(id=req.user.id)
@@ -29,8 +29,12 @@ def dashboard(req):
     return render(req, 'main/dashboard.html', {'jobtasks': jobtask, 'users': user})
 
 @login_required(login_url='main:login')
-def edit(req):
-    return render(req, "main/edit.html")
+def edit(req, jobId):
+    jobtask = JobTask.objects.get(jobId = jobId);
+    context = {
+        "jobtask" : jobtask
+    }
+    return render(req, "main/edit.html", context)
 
 
 def display_video(request, vid=None):
