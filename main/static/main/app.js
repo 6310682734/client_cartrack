@@ -52,10 +52,8 @@
 function showForm(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
   if(selectedValue === "newtask-select") {
-    alert("SHOW!");
     document.getElementById("form-newtask").style.display = "block";
   } else{
-    alert("HIDE!");
     document.getElementById("form-newtask").style.display = "none";
   }
 }
