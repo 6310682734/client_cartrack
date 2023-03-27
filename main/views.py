@@ -80,17 +80,29 @@ def dropzone_files(request):
         # print(json_data['data']['filePath'])
         
         if(json_data):
-            JobTask.objects.create(
-                jobId=json_data['id'], 
-                linkVideo=json_data['data']['filePath'], 
-                uid=user,
-                locationName="default",
-                latitude = Decimal(0),
-                longtitude = Decimal(0),
-                status="Waiting"
-            )
-            update_data_task(request, json_data)
-            return redirect('main:dashboard')
+            if(request.POST.get('newtask-select') == "preset"):
+                JobTask.objects.create(
+                    jobId=json_data['id'], 
+                    linkVideo=json_data['data']['filePath'], 
+                    uid=user,
+                    locationName="default",
+                    latitude = float("0.0000"),
+                    longtitude = float("0.0000"),
+                    status="Waiting"
+                )
+                return redirect('main:dashboard')
+            elif(request.POST.get('newtask-select') == "newtask"):
+                JobTask.objects.create(
+                        jobId=json_data['id'], 
+                        linkVideo=json_data['data']['filePath'], 
+                        uid=user,
+                        locationName="default",
+                        latitude = float("0.0000"),
+                        longtitude = float("0.0000"),
+                        status="Waiting"
+                    )
+                update_data_task(request, json_data)
+                return redirect('main:dashboard')
             #update_data_task(request, json_data)
         # pickup_dict = {}
         # pickup_records=[]
@@ -118,7 +130,6 @@ def update_data_task(request, data_job):
         task_data = JobTask.objects.get(jobId=data_job['id'])
         task_data.latitude = float(request.POST['latitude'])
         task_data.longtitude = float(request.POST['longtitude'])
-        print(type(task_data.latitude),type(task_data.longtitude))
         task_data.locationName = request.POST.get('fname')
         task_data.save()
         return redirect('main:dashboard')
