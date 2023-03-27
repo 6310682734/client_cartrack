@@ -137,7 +137,7 @@
   </nav>
   {% endif %}
   <div class="container-fluid">{% block body %} {% endblock %}</div>
-  {% if request.path != "/login/" %}
+  {% if request.path != "/login/" and request.path != "/register/"%}
   <footer>
     <div class="footer">
       <div class="container">
