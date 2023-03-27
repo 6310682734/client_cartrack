@@ -91,7 +91,7 @@ def dropzone_files(request):
                     status="Waiting"
                 )
                 return redirect('main:dashboard')
-            elif(request.POST.get('newtask-select') == "newtask"):
+            elif(request.POST.get('newtask-select') == "newtask-select"):
                 JobTask.objects.create(
                         jobId=json_data['id'], 
                         linkVideo=json_data['data']['filePath'], 

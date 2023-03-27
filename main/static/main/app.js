@@ -51,15 +51,12 @@
 
 function showForm(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-  console.log(selectedValue)
-  let subForms = document.getElementsByClassName('form-newtask')
-  for (let i = 0; i < subForms.length; i += 1) {
-    console.log(subForms[i].classList)
-    if (subForms[i].classList.contains(selectedValue)) {
-      subForms[i].setAttribute('style', 'display:block')
-    } else {
-      subForms[i].setAttribute('style', 'display:none') 
-    }
+  if(selectedValue === "newtask-select") {
+    alert("SHOW!");
+    document.getElementById("form-newtask").style.display = "block";
+  } else{
+    alert("HIDE!");
+    document.getElementById("form-newtask").style.display = "none";
   }
 }
 
