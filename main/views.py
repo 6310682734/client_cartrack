@@ -25,7 +25,7 @@ def index(req):
 def dashboard(req):
 
     user = User.objects.get(id=req.user.id)
-    jobtask = JobTask.objects.filter(uid=user.id)
+    jobtask = JobTask.objects.filter(uid=user.id).order_by('-id')
     return render(req, 'main/dashboard.html', {'jobtasks': jobtask, 'users': user})
 
 @login_required(login_url='main:login')
@@ -116,6 +116,8 @@ def recive_hook(request):
             json_data = json.loads(request.body)
             job = JobTask.objects.get(jobId=json_data['job_id'])
             job.linkVideo=json_data['result']['file_name']
+            job.frame = json_data['result']['frame']
+            job.count = json_data['result']['count']
             job.status="SUCCESS"
             job.save()
         except Exception as e:

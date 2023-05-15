@@ -18,6 +18,8 @@ class JobTask(models.Model):
 	linkVideo = models.URLField(null=True ,blank=True)
 	uid = models.ForeignKey(User, on_delete=models.CASCADE, null=True ,blank=True)
 	jobId = models.PositiveIntegerField()
+	count = models.IntegerField(default=0, null=True ,blank=True)
+	frame = models.IntegerField(default=0, null=True ,blank=True)
 	status = models.TextField(null=True ,blank=True)
 	createdAt = models.DateTimeField(auto_now_add=True)
 	updatedAt = models.DateTimeField(auto_now_add=True)

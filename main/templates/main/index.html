@@ -21,15 +21,17 @@
 <section>
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th scope="col">JobID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Location</th>
-            <th scope="col">Status</th>
-            <th scope="col">Date Modify</th>
-            <th scope="col">Date Upload</th>
-            <th scope="col">Edit/Delete</th>
-        </tr>
+            <tr>
+                <th scope="col">JobID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Status</th>
+                <th scope="col">Frame</th>
+                <th scope="col">Count</th>
+                <th scope="col">Date Modify</th>
+                <th scope="col">Date Upload</th>
+                <th scope="col">Edit/Delete</th>
+            </tr>
         </thead>
         <tbody>
             {% for jobtask in jobtasks %}
@@ -40,6 +42,8 @@
                             <a href="http://map.google.com/?saddr=&daddr={{jobtask.latitude}},{{jobtask.longtitude}}&travelmode=driving&dir_action=navigate" target="_blank">{{jobtask.latitude}},{{jobtask.longtitude}}</a>
                         </td>
                         <td>{{ jobtask.status }}</td>
+                        <td>{{ jobtask.frame }}</td>
+                        <td>{{ jobtask.count }}</td>
                         <td>{{ jobtask.updatedAt }}</td>
                         <td>{{ jobtask.createdAt }}</td>
                         <td>
