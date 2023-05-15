@@ -67,7 +67,7 @@ def dropzone_files(request):
         user = User.objects.get(id=request.user.id)
     except Exception as e:
         print(e)
-    url = 'http://127.0.0.1:3003/v1/upload'
+    url = 'http://scheduler:3003/v1/upload'
     if request.method == "POST":
         image = request.FILES['file']
         header = {'Content-Type: multipart/form-data'}
