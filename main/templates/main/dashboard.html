@@ -59,7 +59,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <form  action="/dropzone-files" class="form-data" name="form-data" id="form-data" method="POST">
+                <form  action="/dropzone-files" class="form-data" name="form-data" id="form-data" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% comment %} 
                     <form action="/dropzone-files" id="DidDropzone" class="dropzone dz-modal mb-2" accept-charset="UTF-8" method="POST">
@@ -69,7 +69,7 @@
                     {% endcomment %}
                     <div class="mb-3 col-6 select-modal">
                         <label for="formFile" class="form-label">Default file input example</label>
-                        <input name="file" class="form-control" type="file" id="formFile">
+                        <input name="file" class="form-control" type="file">
                     </div>
                     <div class="select-modal col-6">
                         <label class="mr-sm-2" for="newtask-select">Preference</label>

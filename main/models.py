@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class UserFiles(models.Model):
 	
 	timestamp = models.DateTimeField(auto_now_add=True)
-	image = models.ImageField(verbose_name="User file", upload_to="")
+	image = models.FileField(verbose_name="User file", upload_to="")
 
 	def __str__(self):
 		return f''

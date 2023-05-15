@@ -30,7 +30,7 @@ def dashboard(req):
 
 @login_required(login_url='main:login')
 def edit(req, jobId):
-    jobtask = JobTask.objects.get(jobId = jobId);
+    jobtask = JobTask.objects.get(jobId = jobId)
     context = {
         "jobtask" : jobtask
     }
@@ -67,11 +67,9 @@ def dropzone_files(request):
         user = User.objects.get(id=request.user.id)
     except Exception as e:
         print(e)
-    url = 'http://178.128.115.54:3003/v1/upload'
+    url = 'http://127.0.0.1:3003/v1/upload'
     if request.method == "POST":
-        image = request.POST['file']
-        print(image)
-        #print(image.content_type, image.name, image.size)
+        image = request.FILES['file']
         header = {'Content-Type: multipart/form-data'}
         # img = UserFiles.objects.create(image=image)
         result = requests.post(url, files={"file": image})
